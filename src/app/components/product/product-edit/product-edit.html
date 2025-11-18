@@ -1,0 +1,81 @@
+<div class="flex justify-center py-8">
+  <mat-card class="w-full max-w-2xl">
+    <mat-card-header class="mb-6">
+      <div mat-card-avatar class="w-10 h-10 rounded-full bg-blue-900 flex items-center justify-center text-white">
+        <mat-icon>edit</mat-icon>
+      </div>
+      <mat-card-title>
+        {{ isEditMode ? 'Upravit produkt' : 'Nový produkt' }}
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-6">
+        <mat-form-field class="w-full block mb-4" appearance="fill">
+          <mat-label>Název produktu</mat-label>
+          <input matInput formControlName="name" required />
+          @if (form.get('name')?.hasError('required')) {
+            <mat-error>Zvolte název produktu</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="w-full block mb-4" appearance="fill">
+          <mat-label>Kategorie</mat-label>
+          <mat-select formControlName="category" required>
+            @for (category of categories; track category) {
+            <mat-option [value]="category">{{ category }}</mat-option>
+            }
+          </mat-select>
+          @if (form.get('category')?.hasError('required')) {
+            <mat-error>Zvolte kategorii</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="w-full block mb-4" appearance="fill">
+          <mat-label>Cena</mat-label>
+          <input matInput type="number" formControlName="price" required />
+          @if (form.get('price')?.hasError('required')) {
+            <mat-error>Zadejte cenu</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="w-full block mb-4" appearance="fill">
+          <mat-label>Skladem</mat-label>
+          <input matInput type="number" formControlName="stock" required />
+          @if (form.get('stock')?.hasError('required')) {
+            <mat-error>Zadejte počet kusů skladem</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="block mb-4" appearance="fill">
+          <mat-label>Stav</mat-label>
+          <mat-select formControlName="status" required>
+            @for (status of statuses; track status) {
+            <mat-option [value]="status">{{ status }}</mat-option>
+            }
+          </mat-select>
+          @if (form.get('status')?.hasError('required')) {
+            <mat-error>Zvolte stav</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="flex gap-4 pt-4">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="form.invalid"
+            class="flex-1"
+          >
+            <mat-icon>save</mat-icon>
+            {{ isEditMode ? 'Uložit změny' : 'Vytvořit' }}
+          </button>
+          <button mat-stroked-button type="button" (click)="cancel()" class="flex-1">
+            <mat-icon>close</mat-icon>
+            Zrušit
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

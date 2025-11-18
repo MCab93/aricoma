@@ -1,0 +1,58 @@
+<div class="block">
+  <button mat-button (click)="goBack()" class="mb-5">
+    <mat-icon>arrow_back</mat-icon>
+    Zpět na seznam
+  </button>
+
+  @if (product) {
+    <mat-card class="shadow-md">
+      <mat-card-header class="flex items-center gap-4 mb-6">
+        <div mat-card-avatar class="flex items-center justify-center w-10 h-10 rounded-full text-white text-2xl font-bold bg-blue-500">
+          {{ product.name.charAt(0) }}
+        </div>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        <mat-card-subtitle>ID: {{ product.id }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-divider/>
+
+      <mat-card-content class="p-4">
+        <mat-list>
+          <mat-list-item>
+            <strong matListItemTitle>Kategorie</strong>
+            <span matListItemLine>{{ product.category }}</span>
+          </mat-list-item>
+
+          <mat-list-item>
+            <strong matListItemTitle>Cena</strong>
+            <span matListItemLine>{{ product.price }} Kč</span>
+          </mat-list-item>
+
+          <mat-list-item>
+            <strong matListItemTitle>Skladem</strong>
+            <span matListItemLine>{{ product.stock }} ks</span>
+          </mat-list-item>
+
+          <mat-list-item>
+            <strong matListItemTitle>Stav</strong>
+            <span matListItemLine>{{ product.status }}</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+
+      <mat-divider/>
+
+      <mat-card-actions class="flex gap-2 justify-end p-4">
+        <button mat-button (click)="editProduct()">Upravit</button>
+        <button mat-raised-button color="warn" (click)="openDeleteDialog()">Smazat</button>
+      </mat-card-actions>
+    </mat-card>
+  } @else {
+    <mat-card class="text-center p-10">
+      <mat-card-content>
+        <p class="text-xl font-bold pb-8">Produkt nenalezen</p>
+        <button mat-raised-button color="primary" (click)="goBack()">Zpět na seznam</button>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>
