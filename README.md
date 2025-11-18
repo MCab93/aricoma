@@ -67,3 +67,4 @@ UnitTesty - záležitost, se kterou mám minimům zkušeností, nicméně vzhled
 
 ### Čas strávený vývojem
 
+8.5h
